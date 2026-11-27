@@ -5,31 +5,44 @@
 from Modules import Products
 from Modules.ProductTypes import *
 
-def bubble_v2(productDict: productDictionaryDefinition):
+def bubble_v2(productDict: dict):
 
-    swapped : bool = True # Variable to check if anything has been swapped
-    prevPrice : float = 0
+    swapped : bool = True # Variable to track if anything has been swapped
+    prevPrice : float = 0 # Previous price
+    iterations : int = 0 # Track iterations
 
     while swapped: # Repeat while things are swapping
-        # Resetting variables
+
+        # Resetting flags
         swapped = False
         prevPrice = 0
 
-        for i, product in (productDict.items()): # Loop through all the products
+        #print(productDict)
 
-            for j, val in product.items(): # Loop through the values in the product
+        # Main loop
+        for i, (key, product) in enumerate(productDict.items()): # Loop through all the products
+            # Skip iteration if it is the first iteration
+            if (i <= 0):
+                continue
 
-                if (j != "price"): # If it is not a price variable, next iteration
-                    continue
+            try:
+                curPrice = product["price"]
+            except:
+                print("Incorrect price value!")
+                continue
+            else:
+                curPrice = product["price"]
 
-                curPrice = val
+                if (prevPrice < curPrice): # If the value before is smaller than the value now, swap positions
+                    productDict[i], productDict[i-1] = productDict[i-1], productDict[i]
 
-                #if (prevPrice > curPrice): # If the value before is larger than the value now, swap positions
-                #    productDict[i], productDict[i-1] = productDict[i-1], productDict[i]
+                    swapped = True
 
-                #    swapped = True
+            prevPrice = curPrice
+            
+            
 
-                prevPrice = curPrice
+            
 
     print("---------------------")
     print("Product list sorted!")
