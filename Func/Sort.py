@@ -5,32 +5,47 @@
 from Modules import Products
 from Modules.ProductTypes import *
 
-def bubble_v2(productDict: productDictionaryDefinition):
+def bubble_v2(productDict: dict):
 
-    swapped : bool = True # Variable to check if anything has been swapped
-    prevPrice : float = 0
+    swapped : bool = True # Variable to track if anything has been swapped
+
+    previousPrice : float = 0 # Previous price
+    previousProduct : productDefinition = None
+
+    keys : list = [] # List of keys to identify products with
 
     while swapped: # Repeat while things are swapping
-        # Resetting variables
+
+        # Resetting flags
         swapped = False
-        prevPrice = 0
 
-        for i, product in (productDict.items()): # Loop through all the products
+        previousProduct = None
+        previousPrice = 0
+        previousKey = 0
 
-            for j, val in product.items(): # Loop through the values in the product
+        keys = productDict.keys()
 
-                if (j != "price"): # If it is not a price variable, next iteration
-                    continue
+        for i, (key) in enumerate(keys):
+            currentProduct = productDict[key]
+            currentPrice = currentProduct["price"]
+            currentKey = key
 
-                curPrice = val
+            if (i == 0): # First iteration
+                previousProduct = currentProduct
+                previousPrice = currentPrice
+                previousKey = currentKey
 
-                #if (prevPrice > curPrice): # If the value before is larger than the value now, swap positions
-                #    productDict[i], productDict[i-1] = productDict[i-1], productDict[i]
+                continue
 
-                #    swapped = True
+            if (previousPrice < currentPrice):
+                productDict[previousKey], productDict[currentKey] = productDict[currentKey], productDict[previousKey]
 
-                prevPrice = curPrice
+                swapped = True
 
+            previousProduct = currentProduct
+            previousPrice = currentPrice
+            previousKey = currentKey
+            
     print("---------------------")
     print("Product list sorted!")
     print("---------------------")
