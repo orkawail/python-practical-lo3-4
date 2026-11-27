@@ -24,10 +24,10 @@ def bubble_v2(productDict: productDictionaryDefinition):
 
                 curPrice = val
 
-                if (prevPrice > curPrice): # If the value before is larger than the value now, swap positions
-                    productDict[i], productDict[i-1] = productDict[i-1], productDict[i]
+                #if (prevPrice > curPrice): # If the value before is larger than the value now, swap positions
+                #    productDict[i], productDict[i-1] = productDict[i-1], productDict[i]
 
-                    swapped = True
+                #    swapped = True
 
                 prevPrice = curPrice
 
