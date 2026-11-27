@@ -8,7 +8,6 @@ from Modules.Products import *
 from Modules.ProductTypes import *
 
 # Variables
-inputCount : int = 0 # Counter for how many inputs have been created
 inputProductPrices : list[float] = [] # Contains the prices of the products that have been entered by the user
 
 productDictionary : dict = Compile.getProducts()
@@ -17,14 +16,10 @@ productDictionarySize : int = len(productDictionary) - 1 # Removes 1 as dictiona
 List.list_products(productDictionary)
 
 # Main loop to accept inputs
-while inputCount < 5:
-
-    # Sanity check to ensure no extra products are bugged into the list
-    if (inputCount < 0):
-        inputCount = 0
+while (len(inputProductPrices) < 5):
 
     # Deciding which prompt to use
-    if (inputCount == 0):
+    if (len(inputProductPrices) == 0):
         print("---------------------")
         inp = input("Please select a product by typing it's ID (Left hand side): ")
         print("---------------------")
@@ -37,7 +32,6 @@ while inputCount < 5:
         inp = float(inp)
     except:
         print("Please enter a valid input type!")
-        inputCount -= 1
     else:
         id = float(inp)
 
@@ -45,7 +39,6 @@ while inputCount < 5:
 
         if (validNum == False): # If the number is not valid
             print("Please enter a valid input type!")
-            inputCount -= 1
 
             continue
         
@@ -57,8 +50,6 @@ while inputCount < 5:
                 continue
 
             inputProductPrices.append(val)
-
-    inputCount += 1
 
 # Obtaining full price and the dicounted price
 fullPrice, discountedPrice = Calculate.calculate_price(inputProductPrices)
