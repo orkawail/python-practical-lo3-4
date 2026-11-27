@@ -2,23 +2,25 @@
 # Automatically compiles a dictionary of products from 'products.py'
 
 from inspect import getmembers
+from typing import *
 
 # Func imports
 from Func.Sort import *
 
 # Modules imports
-from Modules import Products
+from Modules.Products import *
 from Modules.ProductTypes import *
 
-def getProducts() -> productDictionaryDefinition:
-    productDict : productDictionaryDefinition = {}
-    iteration : int = 0 # Custom iteration for key values
+def getProducts() -> dict:
 
-    for i, product in getmembers(Products):
-        if (isinstance(product, dict)):
-            productDict[iteration] = product
+    productDict : dict = {} # Create a new table
+    iteration : int = 0 # Counts the loop iterations
 
-            iteration += 1
+    # Loops through a copy of the original table
+    for p in (products.copy().values()): 
+        productDict[iteration] = p
+
+        iteration += 1
 
     productDict = bubble_v2(productDict)
 

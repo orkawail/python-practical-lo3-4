@@ -1,10 +1,10 @@
 # Created by Bence Elmer @ 20/11/26
 # Main python file.
 
-from Func import Compile, Sort
+from Func import Compile, Sort, TypeCheck
 
 # Modules imports
-from Modules import Products
+from Modules.Products import *
 from Modules.ProductTypes import *
 
 # Variables
@@ -15,7 +15,8 @@ inputProductPrices : list[float] = [] # Contains the prices of the products that
 inputProductTotalPrice : float = 0
 
 # Main Body
-productDictionary : productDictionaryDefinition = Compile.getProducts()
+productDictionary : dict = Compile.getProducts()
+productDictionarySize : int = len(productDictionary)
 
 for i, product in (productDictionary.items()):
     name : str = None
@@ -27,6 +28,8 @@ for i, product in (productDictionary.items()):
 
         if (j == "price"):
             price = val
+
+    productDictionarySize += 1
 
     print(f"id: {i}", " | ", f"item: {name}", " | ",f"price: {price}")
 
@@ -47,6 +50,15 @@ while inputCount < 5:
         inputCount -= 1
     else:
         id = float(inp)
+        validNum = TypeCheck.check_num(id, 0, productDictionarySize)
+        print(productDictionarySize)
+
+        if (validNum == False):
+            print("Please enter a valid input type!")
+            inputCount -= 1
+
+            continue
+
         product : productDefinition = productDictionary[id]
 
         for i, val in (product.items()):
