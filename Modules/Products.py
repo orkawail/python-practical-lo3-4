@@ -19,5 +19,13 @@ products : dict[str, productDefinition] = {
     "cheese" : {
         "name" : "Cheese",
         "price": 3.25
+    },
+    "energy_drink" : {
+        "name" : "Monster Energy",
+        "price" : 1.99
+    },
+    "water" : {
+        "name" : "Bottle of Water",
+        "price" : 0.99
     }
 }

@@ -1,37 +1,22 @@
 # Created by Bence Elmer @ 20/11/26
 # Main python file.
 
-from Func import Compile, Sort, TypeCheck
+from Func import Compile, Sort, TypeCheck, List
 
 # Modules imports
 from Modules.Products import *
 from Modules.ProductTypes import *
 
 # Variables
-inputs : list[int] = [] # Defines a list of integers
 inputCount : int = 0 # Counter for how many inputs have been created
 
 inputProductPrices : list[float] = [] # Contains the prices of the products that have been entered by the user
-inputProductTotalPrice : float = 0
+inputProductTotalPrice : float = 0 # Contains the total price of all of the products
 
-# Main Body
 productDictionary : dict = Compile.getProducts()
 productDictionarySize : int = len(productDictionary)
 
-for i, product in (productDictionary.items()):
-    name : str = None
-    price : float = None
-
-    for j, val in (product.items()):
-        if (j == "name"):
-            name = val
-
-        if (j == "price"):
-            price = val
-
-    productDictionarySize += 1
-
-    print(f"id: {i}", " | ", f"item: {name}", " | ",f"price: {price}")
+List.list_products(productDictionary)
 
 # Main loop to accept inputs
 while inputCount < 5:
